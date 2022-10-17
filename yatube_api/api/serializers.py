@@ -49,8 +49,6 @@ class FollowSerializer(serializers.ModelSerializer):
     )
     following = serializers.SlugRelatedField(
         queryset=User.objects.all(),
-        # many=True,
-        # read_only=True,
         slug_field='username'
     )
 
@@ -63,7 +61,7 @@ class FollowSerializer(serializers.ModelSerializer):
                 fields=['user', 'following']
             )
         ]
-    
+
     def validate(self, data):
         user = self.context['request'].user
         if data['following'] == user:
