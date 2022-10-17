@@ -7,6 +7,7 @@ FIRST_POST_SYM = 15
 
 
 class Group(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     description = models.TextField()
@@ -16,6 +17,7 @@ class Group(models.Model):
 
 
 class Post(models.Model):
+    id = models.AutoField(primary_key=True)
     text = models.TextField()
     pub_date = models.DateTimeField(
         'Дата публикации', auto_now_add=True
@@ -31,14 +33,12 @@ class Post(models.Model):
         related_name="posts", blank=True, null=True
     )
 
-    class Meta:
-        ordering = ['-pub_date']
-
     def __str__(self) -> str:
         return self.text[:FIRST_POST_SYM]
 
 
 class Comment(models.Model):
+    id = models.AutoField(primary_key=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='comments'
     )
@@ -58,6 +58,7 @@ class Comment(models.Model):
 
 
 class Follow(models.Model):
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -73,6 +74,6 @@ class Follow(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'following'],
-                name='unique_user_following',
+                name='unique_user_following'
             ),
         ]

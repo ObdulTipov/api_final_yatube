@@ -18,8 +18,8 @@ router.register(r'follow', FollowViewSet, basename='follow')
 
 urlpatterns = [
     path('v1/', include(router.urls)),
-    path('v1/admin/', admin.site.urls),
-    path('v1/api-token-auth/', views.obtain_auth_token),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
+    # path('v1/admin/', admin.site.urls),
+    # path('v1/api-token-auth/', views.obtain_auth_token),
+    # path('auth/', include('djoser.urls')),
+    path('v1/', include('djoser.urls.jwt')),
 ]
